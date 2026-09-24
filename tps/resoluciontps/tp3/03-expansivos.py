@@ -31,17 +31,29 @@ def list2num(arreglo: np.ndarray) -> int:
 
 
 class TestExpansivos(unittest.TestCase):
-    def test_expand(self):
-        np.testing.assert_array_equal(expand(np.array([1])), np.array([1, 1]))
-        np.testing.assert_array_equal(expand(np.array([1, 1])), np.array([2, 1]))
-        np.testing.assert_array_equal(expand(np.array([2, 1])), np.array([1, 2, 1, 1]))
-        np.testing.assert_array_equal(expand(np.array([1, 2, 1, 1])), np.array([1, 1, 1, 2, 2, 1]))
+    def testExpand_desdeUno(self):
+        np.testing.assert_array_equal(np.array([1, 1]), expand(np.array([1])))
 
-    def testList2num(self):
-        self.assertEqual(list2num(np.array([1, 1])), 11)
-        self.assertEqual(list2num(np.array([2, 1])), 21)
-        self.assertEqual(list2num(np.array([1, 2, 1, 1])), 1211)
-        self.assertEqual(list2num(np.array([1, 1, 1, 2, 2, 1])), 111221)
+    def testExpand_desdeOnce(self):
+        np.testing.assert_array_equal(np.array([2, 1]), expand(np.array([1, 1])))
+
+    def testExpand_desdeVeintiuno(self):
+        np.testing.assert_array_equal(np.array([1, 2, 1, 1]), expand(np.array([2, 1])))
+
+    def testExpand_desdeMilDoscientosOnce(self):
+        np.testing.assert_array_equal(np.array([1, 1, 1, 2, 2, 1]), expand(np.array([1, 2, 1, 1])))
+
+    def testList2num_once(self):
+        self.assertEqual(11, list2num(np.array([1, 1])))
+
+    def testList2num_veintiuno(self):
+        self.assertEqual(21, list2num(np.array([2, 1])))
+
+    def testList2num_milDoscientosOnce(self):
+        self.assertEqual(1211, list2num(np.array([1, 2, 1, 1])))
+
+    def testList2num_cientoOnceMilDoscientosVeintiuno(self):
+        self.assertEqual(111221, list2num(np.array([1, 1, 1, 2, 2, 1])))
 
 
 if __name__ == "__main__":
